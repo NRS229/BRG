@@ -29,9 +29,6 @@ public class ToppingScript : MonoBehaviour
         {
             BecomePartOfBurger();
             InstantiateTopping();
-            //float newToppingY = gameObject.transform.position.y + 0.35f;
-            //ManagerSC.instance.InstantiateTopping(newToppingY);
-            //ManagerSC.instance.RandomNextToppingSprite();
         }
     }
 
@@ -46,13 +43,35 @@ public class ToppingScript : MonoBehaviour
 
     private void InstantiateTopping()
     {
-        //float x = GameObject.Find("UpperBun").transform.position.x + Random.Range(10, 16);
-        //float y = newToppingY;
         float x = transform.position.x + Random.Range(10, 16);
         float y = transform.position.y + 0.46f;
 
         NextTopping = Instantiate(NewToppingPrefab, new Vector2(x, y), Quaternion.identity) as GameObject;
         NextTopping.GetComponent<ToppingScript>().NewToppingPrefab = NewToppingPrefab;
+        RandomNextToppingSprite();
+    }
+
+    public void RandomNextToppingSprite()
+    {
+        int nextToppingSpriteRandom = Random.Range(1, 5);
+        switch (nextToppingSpriteRandom)
+        {
+            case 1:
+                NextTopping.GetComponent<SpriteRenderer>().sprite = ToppingSprites[0];
+                break;
+
+            case 2:
+                NextTopping.GetComponent<SpriteRenderer>().sprite = ToppingSprites[1];
+                break;
+
+            case 3:
+                NextTopping.GetComponent<SpriteRenderer>().sprite = ToppingSprites[2];
+                break;
+
+            case 4:
+                NextTopping.GetComponent<SpriteRenderer>().sprite = ToppingSprites[3];
+                break;
+        }
     }
 
 }

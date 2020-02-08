@@ -96,7 +96,11 @@ MonoBehaviour:
   speed: 0.1
   NewToppingPrefab: {fileID: 6241735090069577546, guid: 7ab3c9bdfc5674cfe9d93487fc8fa44d,
     type: 3}
-  ToppingSprites: []
+  ToppingSprites:
+  - {fileID: 21300000, guid: 27715154d073141a1bbf112fa315ae51, type: 3}
+  - {fileID: 21300000, guid: eb8d4d781486e4ba98b6cb633e935745, type: 3}
+  - {fileID: 21300000, guid: f8414f62adbba4c93930070d3db5bd62, type: 3}
+  - {fileID: 21300000, guid: e4e923f1ab9684b4dbd4661cbd04eceb, type: 3}
 --- !u!61 &4822956120833260393
 BoxCollider2D:
   m_ObjectHideFlags: 0
