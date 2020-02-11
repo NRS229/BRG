@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class BunScript : MonoBehaviour
 {
@@ -10,6 +11,11 @@ public class BunScript : MonoBehaviour
     private bool upperBunTouchingTopping;
     Rigidbody2D rbBunUp;
     public Rigidbody2D rbBunDown;
+    private GameObject NextTopping;
+    public GameObject NewToppingPrefab;
+    public Sprite[] ToppingSprites;
+    private int score;
+    public Text scoreText;
 
 
     void Start()
@@ -60,5 +66,51 @@ public class BunScript : MonoBehaviour
             upperBunTouchingTopping = false;
         }
 
+    }
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.name == "NewTopping")
+        {
+            InstantiateTopping();
+            IncreaseScore();
+        }
+    }
+
+    private void IncreaseScore(){
+        score++;
+        scoreText.text = score.ToString(); 
+    }
+
+    private void InstantiateTopping()
+    {
+        float x = transform.position.x + Random.Range(10, 16);
+        float y = transform.position.y - 0.3f;
+
+        NextTopping = Instantiate(NewToppingPrefab, new Vector2(x, y), Quaternion.identity) as GameObject;
+        NextTopping.name = "NewTopping";
+        RandomNextToppingSprite();
+    }
+
+    public void RandomNextToppingSprite()
+    {
+        int nextToppingSpriteRandom = Random.Range(1, 5);
+        switch (nextToppingSpriteRandom)
+        {
+            case 1:
+                NextTopping.GetComponent<SpriteRenderer>().sprite = ToppingSprites[0];
+                break;
+
+            case 2:
+                NextTopping.GetComponent<SpriteRenderer>().sprite = ToppingSprites[1];
+                break;
+
+            case 3:
+                NextTopping.GetComponent<SpriteRenderer>().sprite = ToppingSprites[2];
+                break;
+
+            case 4:
+                NextTopping.GetComponent<SpriteRenderer>().sprite = ToppingSprites[3];
+                break;
+        }
     }
 }
