@@ -5,22 +5,32 @@ using UnityEngine.UI;
 
 public class BunScript : MonoBehaviour
 {
-    public float jumpForce;
+    //Bool
     private bool jump;
     private bool bunsTouching;
     private bool upperBunTouchingTopping;
+    //Int
+    private int score;
+    //Float
+    public float jumpForce;
+    private float InstantiateToppingY;
+    //Rigidbody
     Rigidbody2D rbBunUp;
     public Rigidbody2D rbBunDown;
+    //GameObject
     private GameObject NextTopping;
     public GameObject NewToppingPrefab;
-    public Sprite[] ToppingSprites;
-    private int score;
+    //UI
     public Text scoreText;
-
+    //Others
+    public Sprite[] ToppingSprites;
 
     void Start()
     {
         rbBunUp = GetComponent<Rigidbody2D>();
+        InstantiateToppingY = GameObject.Find("NewTopping").transform.position.y;
+        //Listen to gameOver event
+        Events.gameOver.AddListener(GameOver);
     }
     
     // Update is for input
@@ -38,41 +48,41 @@ public class BunScript : MonoBehaviour
             jump = false;
             // Add a vertical force (Jump)
             rbBunUp.AddForce(new Vector2(0.0f, jumpForce * 35f));
-            rbBunDown.AddForce(new Vector2(0.0f, jumpForce * 25f));
+            rbBunDown.AddForce(new Vector2(0.0f, jumpForce * 20f));
         }
     }
 
-    private void OnCollisionStay2D(Collision2D collision)
-    {
-        if(collision.gameObject.name == "LowerBun")
+    void OnTriggerEnter2D(Collider2D other){
+        if(other.gameObject.name ==  "NewTopping") {
+            InstantiateTopping();
+            IncreaseScore();
+        }
+        else{
+            if(other.gameObject.name !=  "LowerBun") {
+                GameOver();
+            }
+        }
+    }
+
+    void OnTriggerStay2D(Collider2D other){
+        if(other.gameObject.name == "LowerBun")
         {
             bunsTouching = true;
         }
-        if (collision.gameObject.name == "Topping")
+        if(other.gameObject.name == "Topping")
         {
             upperBunTouchingTopping = true;
         }
-
     }
 
-    private void OnCollisionExit2D(Collision2D collision)
-    {
-        if (collision.gameObject.name == "LowerBun")
+    void OnTriggerExit2D(Collider2D other){
+        if(other.gameObject.name == "LowerBun")
         {
             bunsTouching = false;
         }
-        if (collision.gameObject.name == "Topping")
+        if(other.gameObject.name == "Topping")
         {
             upperBunTouchingTopping = false;
-        }
-
-    }
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
-        if (collision.gameObject.name == "NewTopping")
-        {
-            InstantiateTopping();
-            IncreaseScore();
         }
     }
 
@@ -84,10 +94,9 @@ public class BunScript : MonoBehaviour
     private void InstantiateTopping()
     {
         float x = transform.position.x + Random.Range(10, 16);
-        float y = transform.position.y - 0.3f;
-
-        NextTopping = Instantiate(NewToppingPrefab, new Vector2(x, y), Quaternion.identity) as GameObject;
+        NextTopping = Instantiate(NewToppingPrefab, new Vector2(x, InstantiateToppingY), Quaternion.identity) as GameObject;
         NextTopping.name = "NewTopping";
+        InstantiateToppingY += NextTopping.GetComponent<BoxCollider2D>().size.y;
         RandomNextToppingSprite();
     }
 
@@ -112,5 +121,9 @@ public class BunScript : MonoBehaviour
                 NextTopping.GetComponent<SpriteRenderer>().sprite = ToppingSprites[3];
                 break;
         }
+    }
+
+    public void GameOver(){
+        Debug.Log("Perdiste");
     }
 }

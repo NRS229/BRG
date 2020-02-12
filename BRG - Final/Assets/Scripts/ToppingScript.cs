@@ -6,7 +6,7 @@ public class ToppingScript : MonoBehaviour
 {
     public float speed;
     private bool partOfBurger;
-
+    
     void FixedUpdate()
     {
         if(!partOfBurger)
@@ -26,13 +26,15 @@ public class ToppingScript : MonoBehaviour
         {
             BecomePartOfBurger();
         }
+        if (collision.gameObject.tag == "Ground"){
+            Events.gameOver.Invoke();
+        }
     }
 
     private void BecomePartOfBurger() 
     {
         partOfBurger = true;
         gameObject.AddComponent<Rigidbody2D>();
-        gameObject.GetComponent<Rigidbody2D>().freezeRotation = true;
         gameObject.transform.SetParent(GameObject.Find("UpperBun").transform);
     }    
 
