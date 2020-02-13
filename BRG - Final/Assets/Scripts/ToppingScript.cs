@@ -5,7 +5,7 @@ using UnityEngine;
 public class ToppingScript : MonoBehaviour
 {
     public float speed;
-    private bool partOfBurger;
+    bool partOfBurger;
     
     void FixedUpdate()
     {
