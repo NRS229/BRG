@@ -27,7 +27,6 @@ public class GameLogicScript : MonoBehaviour
     {
         InstantiateToppingY = GameObject.Find("NewTopping").transform.position.y;
         //Listen to events
-        Events.gameOver.AddListener(GameOver);
         Events.instantiateTopping.AddListener(InstantiateTopping);
         Events.increaseScore.AddListener(IncreaseScore);
     }
@@ -67,9 +66,5 @@ public class GameLogicScript : MonoBehaviour
                 NextTopping.GetComponent<SpriteRenderer>().sprite = ToppingSprites[3];
                 break;
         }
-    }
-
-    public void GameOver(){
-        Debug.Log("Perdiste");
     }
 }
