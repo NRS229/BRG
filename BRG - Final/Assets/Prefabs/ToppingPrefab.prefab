@@ -27,8 +27,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6241735090069577546}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 6.45, y: -2.24, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: 6.45, y: -2.201, z: 0}
+  m_LocalScale: {x: 1, y: 1.15, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -94,13 +94,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 0.1
-  NewToppingPrefab: {fileID: 6241735090069577546, guid: 7ab3c9bdfc5674cfe9d93487fc8fa44d,
-    type: 3}
-  ToppingSprites:
-  - {fileID: 21300000, guid: 27715154d073141a1bbf112fa315ae51, type: 3}
-  - {fileID: 21300000, guid: eb8d4d781486e4ba98b6cb633e935745, type: 3}
-  - {fileID: 21300000, guid: f8414f62adbba4c93930070d3db5bd62, type: 3}
-  - {fileID: 21300000, guid: e4e923f1ab9684b4dbd4661cbd04eceb, type: 3}
 --- !u!61 &4822956120833260393
 BoxCollider2D:
   m_ObjectHideFlags: 0

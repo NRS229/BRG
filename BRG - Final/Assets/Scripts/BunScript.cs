@@ -24,7 +24,7 @@ public class BunScript : MonoBehaviour
     // Update is for input
     void Update()
     {
-        if ((Input.GetButtonDown("Jump") || (Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Began)) & (bunsTouching || upperBunTouchingTopping) & !UIScript.isPaused)
+        if ((Input.GetButtonDown("Jump") || (Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Began)) & (bunsTouching || upperBunTouchingTopping) & GameLogicScript.isPlaying)
             jump = true;
     }
   

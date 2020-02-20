@@ -1,39 +1,60 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class GameLogicScript : MonoBehaviour
 {
-    //Int
-    private int score;
+    //Bool
+    public static bool isPlaying = false;
     //Float
     private float InstantiateToppingY;
     //GameObject
     private GameObject NextTopping;
     public GameObject NewToppingPrefab;
-    //UI
-    public Text scoreText;
     //Others
     public Sprite[] ToppingSprites;
 
-
     public static GameLogicScript current;
+
     private void Awake(){
         current = this;
     }
 
     void Start()
     {
+        Pause();
         InstantiateToppingY = GameObject.Find("NewTopping").transform.position.y;
         //Listen to events
         Events.instantiateTopping.AddListener(InstantiateTopping);
-        Events.increaseScore.AddListener(IncreaseScore);
+        Events.resume.AddListener(Resume);
+        Events.pause.AddListener(Pause);
+        Events.mainMenu.AddListener(LoadMenu);
+        Events.startGame.AddListener(StartGame);
+        Events.playAgain.AddListener(PlayAgain);
+        
     }
 
-    private void IncreaseScore(){
-        score++;
-        scoreText.text = score.ToString(); 
+    public void Resume(){
+        Time.timeScale = 1f;
+        isPlaying = true;
+    }
+
+    void Pause(){
+        Time.timeScale = 0f;
+        isPlaying = false;
+    }
+
+    public void LoadMenu(){
+        SceneManager.LoadScene("Main");
+    }
+
+    public void StartGame(){   
+        Resume(); 
+    }
+
+    public void PlayAgain(){
+        //Add play again
     }
 
     private void InstantiateTopping()

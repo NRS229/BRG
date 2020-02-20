@@ -2,21 +2,26 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using UnityEngine.SceneManagement;
 
 public class UIScript : MonoBehaviour
 {
-    public static bool isPaused = false;
     public GameObject pauseMenuUI;
-    public GameObject GameOverMenuUI;
+    public GameObject gameOverMenuUI;
+    public GameObject mainMenuUI;
+    public GameObject gameplayUI;
+    //Play - pause button
     public Button pauseResumeButton;
     public Sprite pauseSprite;
     public Sprite playSprite;
+    //Score
+    public Text scoreText;
+    private int score;
     
     void Start()
     {
         //Listen to events
         Events.gameOver.AddListener(GameOver);
+        Events.increaseScore.AddListener(IncreaseScore);
     }
 
     // Update is called once per frame
@@ -25,44 +30,70 @@ public class UIScript : MonoBehaviour
         if(Input.GetKeyDown(KeyCode.Escape)){
             ResumeOrPause();
         }
-        
+    }
+
+    private void IncreaseScore(){
+        score++;
+        scoreText.text = score.ToString(); 
     }
 
     public void ResumeOrPause(){
-        if(isPaused){
-            Resume();
-        }
-        else{
+        if(GameLogicScript.isPlaying){
             Pause();
         }
+        else{
+            Resume();
+        }
     }
+
     public void Resume(){
         pauseMenuUI.SetActive(false);
-        Time.timeScale = 1f;
-        isPaused = false;
+        gameOverMenuUI.SetActive(false);
+        mainMenuUI.SetActive(false);
+        gameplayUI.SetActive(true);
         pauseResumeButton.GetComponent<Image>().sprite = pauseSprite;
+        Events.resume.Invoke();
     }
 
-    void Pause(){
+    public void Pause(){
         pauseMenuUI.SetActive(true);
-        Time.timeScale = 0f;
-        isPaused = true;
+        gameOverMenuUI.SetActive(false);
+        mainMenuUI.SetActive(false);
+        gameplayUI.SetActive(true);
         pauseResumeButton.GetComponent<Image>().sprite = playSprite;
+        Events.pause.Invoke();
     }
 
-    public void LoadMenu(){
-        Debug.Log("Load menu pressed"); 
+    public void GoToMenu(){
+        pauseMenuUI.SetActive(false);
+        gameOverMenuUI.SetActive(false);
+        mainMenuUI.SetActive(true);
+        gameplayUI.SetActive(false);
+        Events.mainMenu.Invoke();
     }
 
-    public void Restart(){
-        SceneManager.LoadScene("Main");   
-        Resume(); 
+    public void StartGame(){
+        pauseMenuUI.SetActive(false);
+        gameOverMenuUI.SetActive(false);
+        mainMenuUI.SetActive(false);
+        gameplayUI.SetActive(true);
+        Events.startGame.Invoke();
+    }
+
+    public void PlayAgain(){
+        pauseMenuUI.SetActive(false);
+        gameOverMenuUI.SetActive(false);
+        mainMenuUI.SetActive(false);
+        gameplayUI.SetActive(true);
+        Events.playAgain.Invoke();
     }
 
     public void GameOver(){
-        Time.timeScale = 0f;
-        isPaused = true;
-        pauseResumeButton.gameObject.SetActive(false);
-        GameOverMenuUI.SetActive(true);
+        pauseMenuUI.SetActive(false);
+        gameOverMenuUI.SetActive(true);
+        mainMenuUI.SetActive(false);
+        gameplayUI.SetActive(false);
+        Events.pause.Invoke();
     }
+
 }
