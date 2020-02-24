@@ -5,6 +5,9 @@ using UnityEngine.SceneManagement;
 
 public class GameLogicScript : MonoBehaviour
 {
+    //Cameras
+    public GameObject menuCamera;
+    public GameObject gameplayCamera;
     //Bool
     public static bool isPlaying = false;
     //Float
@@ -14,7 +17,7 @@ public class GameLogicScript : MonoBehaviour
     public GameObject NewToppingPrefab;
     //Others
     public Sprite[] ToppingSprites;
-
+    
     public static GameLogicScript current;
 
     private void Awake(){
@@ -51,6 +54,8 @@ public class GameLogicScript : MonoBehaviour
 
     public void StartGame(){   
         Resume(); 
+        menuCamera.gameObject.SetActive(false);
+        gameplayCamera.gameObject.SetActive(true);
     }
 
     public void PlayAgain(){
