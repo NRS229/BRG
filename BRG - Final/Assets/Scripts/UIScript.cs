@@ -16,12 +16,13 @@ public class UIScript : MonoBehaviour
     //Score
     public Text scoreText;
     private int score;
-    
+
     void Start()
     {
         //Listen to events
         Events.gameOver.AddListener(GameOver);
         Events.increaseScore.AddListener(IncreaseScore);
+        Events.playAgainUI.AddListener(PlayAgain);
     }
 
     // Update is called once per frame
@@ -81,11 +82,15 @@ public class UIScript : MonoBehaviour
     }
 
     public void PlayAgain(){
+        Debug.Log("Holiwis");
         pauseMenuUI.SetActive(false);
         gameOverMenuUI.SetActive(false);
         mainMenuUI.SetActive(false);
         gameplayUI.SetActive(true);
-        Events.playAgain.Invoke();
+    }
+
+    public void PlayAgainForButton(){
+        Events.playAgainGameLogic.Invoke();
     }
 
     public void GameOver(){

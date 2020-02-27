@@ -12,6 +12,7 @@ public static class Events
     public static UnityEvent pause = new UnityEvent();
     public static UnityEvent mainMenu = new UnityEvent();
     public static UnityEvent startGame = new UnityEvent();
-    public static UnityEvent playAgain = new UnityEvent();
+    public static UnityEvent playAgainGameLogic = new UnityEvent();
+    public static UnityEvent playAgainUI = new UnityEvent();
 
 }
