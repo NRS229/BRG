@@ -15,10 +15,11 @@ public class UIScript : MonoBehaviour
     public Sprite playSprite;
     //Score
     public Text scoreText;
-    private int score;
+    public Text highScoreText;
 
     void Start()
     {
+        highScoreText.text = PlayerPrefs.GetInt("HighScore", 0).ToString();
         //Listen to events
         Events.gameOver.AddListener(GameOver);
         Events.increaseScore.AddListener(IncreaseScore);
@@ -34,8 +35,7 @@ public class UIScript : MonoBehaviour
     }
 
     private void IncreaseScore(){
-        score++;
-        scoreText.text = score.ToString(); 
+        scoreText.text = GameLogicScript.score.ToString(); 
     }
 
     public void ResumeOrPause(){

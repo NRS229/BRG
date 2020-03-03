@@ -8,6 +8,8 @@ public class GameLogicScript : MonoBehaviour
     //Cameras
     public GameObject menuCamera;
     public GameObject gameplayCamera;
+    //Int
+    public static int score = 0;
     //Bool
     public static bool isPlaying = false;
     public static bool playAgain = false;
@@ -29,6 +31,8 @@ public class GameLogicScript : MonoBehaviour
         Events.mainMenu.AddListener(LoadMenu);
         Events.startGame.AddListener(StartGame);
         Events.playAgainGameLogic.AddListener(PlayAgain);
+        Events.increaseScore.AddListener(IncreaseScore);
+        Events.gameOver.AddListener(CheckUpdateHighScore);
         
         if(playAgain){
             Debug.Log("Invoked event");
@@ -38,6 +42,10 @@ public class GameLogicScript : MonoBehaviour
         }
         else
             Pause();
+    }
+
+    private void IncreaseScore(){
+        score++;
     }
 
     public void Resume(){
@@ -56,6 +64,7 @@ public class GameLogicScript : MonoBehaviour
     }
 
     public void StartGame(){   
+        score = 0;
         Resume(); 
         menuCamera.gameObject.SetActive(false);
         gameplayCamera.gameObject.SetActive(true);
@@ -65,6 +74,12 @@ public class GameLogicScript : MonoBehaviour
     public void PlayAgain(){
         playAgain = true;
         SceneManager.LoadScene("Main");
+    }
+
+    public void CheckUpdateHighScore(){
+        if(score > PlayerPrefs.GetInt("HighScore", 0)){
+            PlayerPrefs.SetInt("HighScore", score);
+        }
     }
 
     private void InstantiateTopping()

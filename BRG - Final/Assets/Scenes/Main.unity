@@ -551,7 +551,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -32.000122, y: -38}
+  m_AnchoredPosition: {x: -32, y: -38}
   m_SizeDelta: {x: 44.399994, y: 42.800003}
   m_Pivot: {x: 1, y: 1}
 --- !u!114 &462444897
@@ -803,7 +803,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -32.000122, y: -38}
+  m_AnchoredPosition: {x: -32, y: -38}
   m_SizeDelta: {x: 44.399994, y: 42.800003}
   m_Pivot: {x: 1, y: 1}
 --- !u!114 &546152756
@@ -839,7 +839,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 0
+  m_Text: X
 --- !u!222 &546152757
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1881,7 +1881,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -77, y: -36.00006}
+  m_AnchoredPosition: {x: -77, y: -36}
   m_SizeDelta: {x: 108, y: 42.800003}
   m_Pivot: {x: 1, y: 1}
 --- !u!114 &1092673312
@@ -2548,7 +2548,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -77, y: -36.00006}
+  m_AnchoredPosition: {x: -77, y: -36}
   m_SizeDelta: {x: 186.2, y: 42.8}
   m_Pivot: {x: 1, y: 1}
 --- !u!114 &1534511211
@@ -3300,6 +3300,7 @@ MonoBehaviour:
   pauseSprite: {fileID: 21300000, guid: 0bf2232b81a234fdb8e3bb05df737a9c, type: 3}
   playSprite: {fileID: 21300000, guid: 54d213e0f2005476db985e3aca52e91b, type: 3}
   scoreText: {fileID: 462444897}
+  highScoreText: {fileID: 546152756}
 --- !u!1 &1900998881
 GameObject:
   m_ObjectHideFlags: 0
