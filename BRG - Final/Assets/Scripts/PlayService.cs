@@ -1,23 +1,30 @@
-﻿using GooglePlayGames;
+﻿using UnityEngine;
+using GooglePlayGames;
 using GooglePlayGames.BasicApi;
-using UnityEngine;
+using UnityEngine.SocialPlatforms;
 
 public class PlayService : MonoBehaviour
 {
+    public static PlayGamesPlatform platform;
+
     void Start()
     {
-        PlayGamesClientConfiguration.Builder builder = new PlayGamesClientConfiguration.Builder();
-        PlayGamesPlatform.InitializeInstance(builder.Build());
-        PlayGamesPlatform.DebugLogEnabled = true;
-        PlayGamesPlatform.Activate();
+        if (platform == null){
+            PlayGamesClientConfiguration config = new PlayGamesClientConfiguration.Builder().Build();
+            PlayGamesPlatform.InitializeInstance(config);
+            PlayGamesPlatform.DebugLogEnabled = true;
 
-        Social.localUser.Authenticate((bool success, string err) => {
+            platform = PlayGamesPlatform.Activate();
+
+        }
+
+        Social.Active.localUser.Authenticate(success => 
+        {
             if (success){
                 Debug.Log("Login success");
             }
             else{
                 Debug.Log("Login failed");
-                Debug.Log("Error: " + err);
             }
         });
 
