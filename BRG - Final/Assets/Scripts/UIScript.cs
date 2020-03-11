@@ -101,4 +101,11 @@ public class UIScript : MonoBehaviour
         Events.pause.Invoke();
     }
 
+    public void ShowLeaderboards(){
+        Social.ShowLeaderboardUI();
+    }
+
+    public void ShowAchievements(){
+        Social.ShowAchievementsUI();
+    }
 }

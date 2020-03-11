@@ -78,7 +78,20 @@ public class GameLogicScript : MonoBehaviour
 
     public void CheckUpdateHighScore(){
         if(score > PlayerPrefs.GetInt("HighScore", 0)){
+            //Save score locally
             PlayerPrefs.SetInt("HighScore", score);
+            //Save score to GPGS
+            Social.ReportScore(score, GPGSIds.leaderboard_highscore, (bool success) =>
+            {
+                if (success){
+                    Debug.Log("Highscore updated in GPGS");
+                }
+            });
+
+            //Achievements
+            if (score >= 10){
+                Social.ReportProgress(GPGSIds.achievement_create_a_burger_with_10_toppings, 100f, null);
+            }
         }
     }
 
