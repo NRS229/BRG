@@ -14,5 +14,8 @@ public static class Events
     public static UnityEvent startGame = new UnityEvent();
     public static UnityEvent playAgainGameLogic = new UnityEvent();
     public static UnityEvent playAgainUI = new UnityEvent();
+    public static NewHighScoreEvent newHighScore = new NewHighScoreEvent();
 
 }
+
+public class NewHighScoreEvent : UnityEvent<int> {}

@@ -77,7 +77,11 @@ public class GameLogicScript : MonoBehaviour
     }
 
     public void CheckUpdateHighScore(){
+        //If there's a new highscore
         if(score > PlayerPrefs.GetInt("HighScore", 0)){
+            //Display new highscore UI
+            Events.newHighScore.Invoke(score);
+
             //Save score locally
             PlayerPrefs.SetInt("HighScore", score);
             //Save score to GPGS
