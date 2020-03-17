@@ -120,6 +120,11 @@ public class UIScript : MonoBehaviour
         newHighscoreText.text = newScore.ToString();
     }
 
+    public void ShowVideoAd(){
+        Events.requestVideoAd.Invoke();
+        Events.showVideoAd.Invoke();
+    }
+
     public void ShowLeaderboards(){
         Social.ShowLeaderboardUI();
     }
